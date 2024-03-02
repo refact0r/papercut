@@ -1,2 +1,15 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<svelte:head>
+	<title>Scholarly</title>
+	<meta name="description" content="Scholarly Home Page" />
+</svelte:head>
+
+<h1>Scholarly</h1>
+<div class="searchbar">
+	<form>
+		<input type="text" placeholder="Search.." name="search" />
+		<button type="submit"><i class="fa fa-search"></i></button>
+	</form>
+</div>
+
+<style lang="scss">
+</style>
