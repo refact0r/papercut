@@ -3,7 +3,7 @@
 	<meta name="description" content="papercut about page" />
 </svelte:head>
 
-<h1><span class="paper">paper</span><span class="slash">/</span>cut</h1>
+<a href="/"><h1><span class="paper">paper</span><span class="slash">/</span>cut</h1></a>
 
 <div class="desc">
 	<h3>What is Papercut?</h3>
