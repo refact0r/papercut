@@ -37,7 +37,7 @@
 <style lang="scss">
 	.searchbar {
 		padding: 2rem 0rem 1rem 2rem;
-		background-color: hsla(0, 0%, 0%, 0%);
+		background-color: hsla(0, 0%, 0%, 0);
 	}
 	input[type='text'] {
 		outline: none;
@@ -69,7 +69,7 @@
 		padding: 1rem 10rem;
 	}
 	.footer {
-		background-color: hsla(0%, 0%, 0%, 0%);
+		background-color: hsla(0, 0%, 0%, 0);
 		padding: 2rem;
 	}
 </style>

@@ -16,33 +16,18 @@
 </script>
 
 <svelte:head>
-	<title>papercut</title>
-	<meta name="description" content="papercut home page" />
+	<title>advanced search - papercut</title>
+	<meta name="description" content="papercut advanced search page" />
 </svelte:head>
 
 <div class="content">
 	<div class="container">
-		<!--<h1>paper<span class="slash">/</span>cut</h1>-->
 		<a href="/"><img src={logo} alt="logo" style="width: 18rem;" /></a>
-		<!--<p style="margin:-.25rem 0rem 0rem 0rem;">finding sources has never been more fun</p>-->
 		<br />
 		<div class="search">
 			<input type="text" placeholder="search..." bind:value={params} bind:this={search} />
 			<a class="submit" href={`/search?q=${params}`}><IconSearch /></a>
 			<br />
-			<a href="/adv-search" class="adv">advanced search</a>
-		</div>
-		<br />
-		<div class="links">
-			<div class="column">
-				<a href="/about" class="options">about/help</a>
-			</div>
-			<div class="column">
-				<a href="/" class="options">settings</a>
-			</div>
-			<div class="column">
-				<a href="/" class="options">github ↗</a>
-			</div>
 		</div>
 	</div>
 </div>
@@ -88,43 +73,4 @@
 		margin-top: 0.5rem;
 		margin-left: -3.6rem;
 	}
-
-	.adv {
-		float: right;
-		padding: 0.25rem 1rem 0rem 0rem;
-		text-decoration: none;
-		color: black;
-	}
-	.adv:hover {
-		text-decoration: underline;
-	}
-
-	.links {
-		display: flex;
-		padding-top: 3rem;
-		margin: 0rem 4rem;
-	}
-	.column {
-		width: 33%;
-		text-align: center;
-	}
-
-	.options {
-		text-decoration: none;
-		color: black;
-		padding: 1rem;
-		border-radius: 2rem;
-		transition: 0.1s;
-	}
-	.options:hover {
-		text-decoration: underline;
-		background-color: rgba(0, 0, 0, 0.25);
-	}
-
-	/*.slash {
-		position: absolute;
-		font-weight: 700;
-		margin-left: 0.15ch;
-		margin-top: 0.1ch;
-	}*/
 </style>
