@@ -204,6 +204,8 @@
 
 	.result {
 		width: 100%;
+		//height: 50%;
+		overflow: hidden;
 		background-color: var(--bg-2);
 		padding: 1rem;
 		cursor: pointer;
