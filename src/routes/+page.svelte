@@ -14,31 +14,35 @@
 </svelte:head>
 
 <div class="content">
-	<div class="logo">
+	<div class="container">
 		<h1><span class="paper">paper</span><span class="slash">/</span>cut</h1>
-	</div>
-	<form on:submit|preventDefault={() => searchQuery()}>
-		<button type="submit" class="submit"><IconSearch style="font-size: 1.4rem;" /></button>
-		<input type="text" placeholder="search..." bind:value={params} required />
-	</form>
-	<div class="row">
-		<h2>find papers fast.</h2>
-		<a href="/settings" class="options">settings</a>
-		<a href="/about">about</a>
+		<form on:submit|preventDefault={() => searchQuery()}>
+			<button type="submit" class="submit"><IconSearch style="font-size: 1.6rem;" /></button>
+			<input type="text" placeholder="search..." bind:value={params} required />
+		</form>
+		<div class="row">
+			<h2>find papers fast.</h2>
+			<a href="/settings" class="options">settings</a>
+			<a href="/about">about</a>
+		</div>
 	</div>
 </div>
 
 <style lang="scss">
 	.content {
-		padding: 5rem;
+		padding: 10vh;
 		height: 100%;
 		width: 100%;
 	}
 
+	.container {
+		margin-top: 20vh;
+	}
+
 	h1 {
-		font-size: 7rem;
+		font-size: 8rem;
 		letter-spacing: -0.015em;
-		margin: 10% 0 0 0;
+		margin: 0;
 		.paper {
 			display: inline-block;
 			vertical-align: top;
@@ -46,7 +50,7 @@
 		}
 
 		.slash {
-			font-size: 9.5rem;
+			font-size: 11rem;
 			font-weight: 500;
 			letter-spacing: -0.05em;
 			margin-left: -0.04em;
@@ -55,6 +59,8 @@
 
 	h2 {
 		color: var(--fg-2);
+		font-weight: 500;
+		font-size: 1.6rem;
 	}
 
 	.row {
@@ -70,20 +76,21 @@
 		width: 100%;
 
 		button {
-			padding: 0.8rem;
+			padding: 0.8rem 1rem;
 			background: none;
 			@include flex(column, center, center);
 		}
 
 		input {
-			padding: 0.8rem 0.8rem 0.8rem 0;
-			font-size: 1.4rem;
+			padding: 0.8rem 1rem 0.8rem 0;
+			font-size: 1.6rem;
 			width: 100%;
 		}
 	}
 
 	a {
-		font-size: 1.3rem;
+		font-weight: 500;
+		font-size: 1.6rem;
 		&.options {
 			margin-left: auto;
 		}
