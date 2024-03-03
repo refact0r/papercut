@@ -88,7 +88,3 @@ async function rawQueryArxiv({ query = "", ids = [], start = 0, max_results = 10
 }
 
 export { rawQueryArxiv as query }
-
-rawQueryArxiv({
-	query: 'all:RNN+AND+all:Deep learning+ANDNOT+all:LSTM+OR+all:GAN'
-})
