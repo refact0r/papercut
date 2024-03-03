@@ -1,6 +1,15 @@
 <script>
 	import IconSearch from '~icons/ph/magnifying-glass-bold';
 	import { goto } from '$app/navigation';
+	let query = '';
+
+	function refresh() {
+		query = query.trim();
+		if (query) {
+			goto('/search?q=' + query);
+			getResults();
+		}
+	}
 </script>
 
 <svelte:head>
