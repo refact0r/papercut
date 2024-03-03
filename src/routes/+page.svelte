@@ -5,7 +5,7 @@
 	let params = '';
 
 	function searchQuery() {
-		goto(`/search?q=${params}`);
+		goto(`/search?q=${encodeURI(params)}`);
 	}
 </script>
 

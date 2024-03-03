@@ -7,7 +7,7 @@
 	let results = data.results;
 
 	function searchQuery() {
-		goto(`/search?q=${params}`);
+		goto(`/search?q=${encodeURI(params)}`);
 	}
 </script>
 
@@ -81,7 +81,7 @@
 	.submit:hover {
 		background-color: rgba(192, 192, 192, 0.75);
 		font-size: 1.7rem;
-		margin-top: 0.6rem;
+		margin-top: 0.5rem;
 		margin-left: -3.6rem;
 		cursor: pointer;
 	}
