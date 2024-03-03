@@ -3,7 +3,8 @@
 	<meta name="description" content="papercut about page" />
 </svelte:head>
 
-<h1><a href="/">papercut</a></h1>
+<h1><span class="paper">paper</span><span class="slash">/</span>cut</h1>
+
 <div class="desc">
 	<h3>What is Papercut?</h3>
 	<p>
@@ -28,8 +29,29 @@
 </div>
 
 <style lang="scss">
+	h1 {
+		font-size: 8rem;
+		letter-spacing: -0.015em;
+		margin: 0;
+		padding-left: 10vh;
+		padding-top: 4vh;
+
+		.paper {
+			display: inline-block;
+			vertical-align: top;
+			margin-top: 0.05em;
+		}
+
+		.slash {
+			font-size: 11rem;
+			font-weight: 500;
+			letter-spacing: -0.05em;
+			margin-left: -0.04em;
+		}
+	}
+
 	.desc {
-		padding: 1rem 10rem;
+		padding: 0rem 10rem;
 	}
 	.footer {
 		background-color: hsla(0, 0%, 0%, 0);
