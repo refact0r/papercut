@@ -45,6 +45,11 @@
 </div>
 <div class="content">
 	<div class="results">
+		{#if results != null}
+			{#each results as result, i}
+				<a href="" class="source" title={result.title}>{result.title}</a>
+			{/each}
+		{/if}
 		<div class="load-pos">
 			<div class="loader"></div>
 		</div>
@@ -68,6 +73,7 @@
 		display: flex;
 		gap: 1%;
 		margin: 0rem 5%;
+		min-height: 70%;
 	}
 
 	form {
@@ -119,7 +125,7 @@
 		background-color: rgb(239, 239, 239);
 	}
 
-	.sources {
+	.source {
 		background-color: white;
 	}
 
