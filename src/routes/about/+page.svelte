@@ -20,7 +20,7 @@
 	<h3>Why should I use Papercut?</h3>
 	<p>
 		With our site, gone are the days of boredom and wasted time on finding relevant and good quality
-		articles on Jstor. Spend your time more productively, using Papercut.
+		articles on arXiv. Spend your time more productively, using Papercut.
 	</p>
 </div>
 <div class="footer">
