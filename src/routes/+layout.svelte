@@ -1,13 +1,11 @@
 <script>
-	import '../app.css';
+	import '../app.scss';
 </script>
 
 <div class="app">
-	<div class="main">
-		<main>
-			<slot />
-		</main>
-	</div>
+	<main>
+		<slot />
+	</main>
 </div>
 
 <style>
