@@ -4,10 +4,16 @@
 	--accent: oklch(60% 0% 0%);
 }
 
+html {
+	height: 100%;
+}
+
 body {
 	background-color: var(--bg);
 	color: var(--fg);
 	margin: 0;
+	height: 100%;
+	min-height: 100vh;
 	// font-family: 'Plus Jakarta Sans', sans-serif;
 	// font-family: 'Manrope', sans-serif;
 	// font-family: 'DM Sans', sans-serif;
