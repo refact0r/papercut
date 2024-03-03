@@ -58,7 +58,7 @@ async function rawQueryArxiv({ query = "", ids = [], start = 0, max_results = 10
 		`max_results=${max_results}`
 	);
 	const objectResponse = (new XMLParser({ ignoreAttributes: false })).parse(await apiResponse.text());
-	const usefulResponse = objectResponse.feed.entry;
+	const usefulResponse = objectResponse.feed.entry.id ? [objectResponse.feed.entry] : objectResponse.feed.entry;
 	return usefulResponse.map(parseArxivObject)
 }
 
