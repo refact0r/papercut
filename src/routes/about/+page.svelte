@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>papercut</title>
+	<title>about papercut</title>
 	<meta name="description" content="papercut home page" />
 </svelte:head>
 
@@ -19,8 +19,8 @@
 	</p>
 	<h3>How do I use Papercut?</h3>
 	<p>
-		To use Papercut, simply search with a prompt in the search bar, and our site will produce a
-		list of sources relevant to your prompt. From there, you can read the synopsis of the sources
+		To use Papercut, simply search with a prompt in the search bar, and our site will produce a list
+		of sources relevant to your prompt. From there, you can read the synopsis of the sources
 		provided by our site by hovering over the different sources, and adjust the sources available to
 		you by keeping or rejecting sources within the list.
 	</p>
