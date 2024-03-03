@@ -6,7 +6,6 @@
 <h1>Scholarly</h1>
 <div class="searchbar">
 	<form>
-		<button type="submit"><i class="fa fa-search"></i></button>
 		<input type="text" placeholder="Search..." name="search" />
 		<button type="submit" id="submit"><i class="fa fa-search"></i></button>
 	</form>
