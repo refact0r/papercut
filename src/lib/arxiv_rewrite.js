@@ -68,7 +68,7 @@ function parseArxivObject({
  * @param {Array.<string>} [param0.ids = []] The arxiv api `id_list` 
  * @param {number} [param0.start = 0] Index of the query
  * @param {number} [param0.max_results = 10] Max results of the query 
- * @returns {object} Returns the arxiv api's xml response parsed as an object
+ * @returns {Promise<{id: string, updated: string, published: string, title: string, summary: string, author: string, link: string, category: string, primary_category: string, comment: string, affiliation: string, journal_ref: string, doi: string}>} Returns the arxiv api's xml response parsed as an object
  */
 async function rawQueryArxiv({ query = "", ids = [], start = 0, max_results = 10 })
 {
