@@ -66,6 +66,7 @@
 								{result.author.join(', ')}
 							</p>
 							<p>Date Published: {result.published}</p>
+							<p>Summary:</p>
 						</div>
 						<button class="add"><IconArrow style="font-size: 1.2rem;" /></button>
 					</div>
@@ -152,7 +153,7 @@
 				transform: translateX(0);
 			}
 			.result:hover {
-				outline: solid 4px var(--fg-3);
+				outline-width: 4px;
 			}
 		}
 	}
@@ -168,7 +169,7 @@
 		padding: 1rem;
 		cursor: pointer;
 		transition: 0.2s;
-		outline: none;
+		outline: solid 0px var(--fg-3);
 		z-index: 2;
 		h3 {
 			margin: 0;
