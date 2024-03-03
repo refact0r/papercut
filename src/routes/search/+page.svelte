@@ -6,8 +6,6 @@
 
 	let results = data.results;
 
-	let params = window.location.search.slice(3, window.location.search.length);
-
 	function searchQuery() {
 		goto(`/search?q=${params}`);
 	}
@@ -27,7 +25,7 @@
 				<input
 					type="text"
 					placeholder="search..."
-					bind:value={params}
+					bind:value={data.query}
 					oninvalid="this.setCustomValidity('please enter a valid search term! only letters and numbers are allowed.')"
 					oninput="this.setCustomValidity('')"
 					pattern="[a-zA-Z0-9]+"
