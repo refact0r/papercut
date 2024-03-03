@@ -33,6 +33,7 @@ body {
 }
 
 button {
+	background: none;
 	border: none;
 	font: inherit;
 	padding: 0;
@@ -58,4 +59,23 @@ input {
 a {
 	text-decoration: none;
 	color: var(--fg-2);
+}
+
+form.searchbar {
+	background-color: var(--bg-2);
+	border-bottom: 4px solid var(--fg);
+	@include flex(row, left, center);
+	width: 100%;
+
+	button {
+		padding: 0.8rem 1rem;
+		background: none;
+		@include flex(column, center, center);
+	}
+
+	input {
+		padding: 0.8rem 1rem 0.8rem 0;
+		font-size: 1.6rem;
+		width: 100%;
+	}
 }
