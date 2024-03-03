@@ -1,6 +1,6 @@
 <svelte:head>
 	<title>about papercut</title>
-	<meta name="description" content="papercut home page" />
+	<meta name="description" content="papercut about page" />
 </svelte:head>
 
 <h1><a href="/">papercut</a></h1>
