@@ -66,6 +66,7 @@
 								{result.author.join(', ')}
 							</p>
 							<p>Date Published: {result.published}</p>
+							<p>Summary:</p>
 						</div>
 						<button class="add"><IconArrow style="font-size: 1.2rem;" /></button>
 					</div>
@@ -89,6 +90,7 @@
 		@include flex(column, default, default);
 		gap: 2vw;
 		padding: 3vw 2vw;
+		height: 100%;
 	}
 
 	.search {
@@ -114,6 +116,7 @@
 	.container {
 		@include flex(row, default, default);
 		gap: 1rem;
+		height: 100%;
 	}
 
 	.results {
@@ -152,14 +155,17 @@
 				transform: translateX(0);
 			}
 			.result:hover {
-				outline: solid 4px var(--fg-3);
+				outline-width: 3px;
 			}
 		}
 	}
 
 	.results-box {
-		width: 100%;
 		margin: 0 3rem;
+		background-color: var(--bg-2);
+		padding: 1rem;
+		height: 100%;
+		@include flex(column, center, center);
 	}
 
 	.result {
@@ -168,7 +174,7 @@
 		padding: 1rem;
 		cursor: pointer;
 		transition: 0.2s;
-		outline: none;
+		outline: solid 0px var(--fg-3);
 		z-index: 2;
 		h3 {
 			margin: 0;
