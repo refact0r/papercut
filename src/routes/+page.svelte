@@ -1,11 +1,6 @@
 <script>
 	import IconSearch from '~icons/ph/magnifying-glass-bold';
 	import { goto } from '$app/navigation';
-	let params = '';
-
-	function searchQuery() {
-		goto(`/search?q=${encodeURI(params)}`);
-	}
 </script>
 
 <svelte:head>
@@ -16,9 +11,9 @@
 <div class="content">
 	<div class="container">
 		<h1><span class="paper">paper</span><span class="slash">/</span>cut</h1>
-		<form on:submit|preventDefault={() => searchQuery()}>
+		<form action="/search">
 			<button type="submit" class="submit"><IconSearch style="font-size: 1.6rem;" /></button>
-			<input type="text" placeholder="search..." bind:value={params} required />
+			<input type="text" placeholder="search..." name="q" required />
 		</form>
 		<div class="row">
 			<h2>find papers fast.</h2>

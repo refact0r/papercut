@@ -1,13 +1,22 @@
 <script>
 	import IconSearch from '~icons/ph/magnifying-glass';
 	import logo from '$lib/assets/papercut-logo.png';
-	import { goto } from '$app/navigation';
-	export let data;
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 
-	let results = data.results;
+	let results;
 
-	function searchQuery() {
-		goto(`/search?q=${encodeURI(data.query)}`);
+	let query = $page.url.searchParams.get('q');
+
+	onMount(async () => {
+		getResults();
+	});
+
+	async function getResults() {
+		results = null;
+		const res = await fetch(`/search?q=${query}`);
+		results = await res.json();
+		console.log(results);
 	}
 </script>
 
@@ -21,8 +30,8 @@
 		<a href="/"><img src={logo} alt="logo" style="width: 18rem;" /></a>
 		<br />
 		<div class="search">
-			<form on:submit|preventDefault={() => searchQuery()}>
-				<input type="text" placeholder="search..." bind:value={data.query} required />
+			<form on:submit|preventDefault={() => getResults()}>
+				<input type="text" placeholder="search..." bind:value={query} required />
 				<button type="submit" class="submit"><IconSearch /></button>
 			</form>
 			<br />
