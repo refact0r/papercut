@@ -22,8 +22,6 @@
 		console.log(results);
 	}
 
-	function expandSummary(element) {}
-
 	function refresh() {
 		query = query.trim();
 		if (query) {
@@ -64,10 +62,13 @@
 				{#each results as result}
 					<div class="result-container">
 						<button class="remove"><IconX style="font-size: 1.2rem;" /></button>
+
 						<div class="result">
 							<h3>{result.title}</h3>
 							<p>{`${parseDate(result.published)} - ${result.author.join(', ')}`}</p>
-							<p>Summary:</p>
+							<p>
+								Summary: {result.summary}
+							</p>
 						</div>
 						<button class="add"><IconArrow style="font-size: 1.2rem;" /></button>
 					</div>
@@ -179,6 +180,8 @@
 
 	.result {
 		width: 100%;
+		//height: 50%;
+		overflow: hidden;
 		background-color: var(--bg-2);
 		padding: 1rem;
 		cursor: pointer;
