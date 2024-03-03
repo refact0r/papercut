@@ -25,7 +25,7 @@
 	</p>
 </div>
 <div class="footer">
-	<h3>Papercut is an app created for the HackPNW 2024 Spring Hackathon</h3>
+	<h3>Papercut is an app created by NicoNekoru, refact0r, shibest, and ben-6 for the HackPNW 2024 Spring Hackathon</h3>
 </div>
 
 <style lang="scss">
