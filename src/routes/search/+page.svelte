@@ -153,7 +153,7 @@
 				transform: translateX(0);
 			}
 			.result:hover {
-				outline-width: 4px;
+				outline-width: 3px;
 			}
 		}
 	}

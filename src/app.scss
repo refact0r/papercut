@@ -3,7 +3,7 @@
 	--bg-2: oklch(86% 0.01 195);
 	--fg: oklch(20% 0.01 195);
 	--fg-2: oklch(35% 0.01 195);
-	--fg-3: oklch(60% 0.01 195);
+	--fg-3: oklch(75% 0.01 195);
 }
 
 * {
@@ -37,6 +37,7 @@ button {
 	border: none;
 	font: inherit;
 	padding: 0;
+
 	&:hover {
 		cursor: pointer;
 	}
@@ -48,9 +49,11 @@ input {
 	background: none;
 	border: none;
 	padding: 0;
+
 	&:focus {
 		outline: none;
 	}
+
 	&::placeholder {
 		color: var(--fg-3);
 	}
