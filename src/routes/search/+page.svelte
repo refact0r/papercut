@@ -44,7 +44,12 @@
 					<div class="result-container">
 						<button class="remove"><IconX style="font-size: 1.2rem;" /></button>
 						<div class="result">
-							<a href={result.id} class="source" title={result.title}><h3>{result.title}</h3></a>
+							<h3>{result.title}</h3>
+							<p>
+								Author(s):
+								{result.author.join(', ')}
+							</p>
+							<p>Date Published: {result.published}</p>
 						</div>
 						<button class="add"><IconArrow style="font-size: 1.2rem;" /></button>
 					</div>
@@ -136,6 +141,8 @@
 		width: 100%;
 		background-color: var(--bg-2);
 		padding: 1rem;
+		cursor: pointer;
+		transition: 0.1s;
 		h3 {
 			margin: 0;
 			font-size: 1.1rem;
@@ -143,6 +150,10 @@
 		a {
 			color: var(--fg);
 		}
+	}
+
+	.result:hover {
+		border: 0.2rem solid gray;
 	}
 
 	.load-pos {
