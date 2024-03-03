@@ -22,15 +22,7 @@
 		<br />
 		<div class="search">
 			<form on:submit|preventDefault={() => searchQuery()}>
-				<input
-					type="text"
-					placeholder="search..."
-					bind:value={data.query}
-					oninvalid="this.setCustomValidity('please enter a valid search term! only letters and numbers are allowed.')"
-					oninput="this.setCustomValidity('')"
-					pattern="[a-zA-Z0-9]+"
-					required
-				/>
+				<input type="text" placeholder="search..." bind:value={data.query} required />
 				<button type="submit" class="submit"><IconSearch /></button>
 			</form>
 			<br />
