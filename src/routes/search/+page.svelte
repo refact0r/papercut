@@ -6,10 +6,10 @@
 
 	let results = data.results;
 
-	let params = window.location.search.slice(3, window.location.search.length);
-
+	let params = decodeURI(window.location.search.slice(3, window.location.search.length));
+	
 	function searchQuery() {
-		goto(`/search?q=${params}`);
+		goto(`/search?q=${encodeURI(params)}`);
 	}
 </script>
 
@@ -28,9 +28,6 @@
 					type="text"
 					placeholder="search..."
 					bind:value={params}
-					oninvalid="this.setCustomValidity('please enter a valid search term! only letters and numbers are allowed.')"
-					oninput="this.setCustomValidity('')"
-					pattern="[a-zA-Z0-9]+"
 					required
 				/>
 				<button type="submit" class="submit"><IconSearch /></button>
