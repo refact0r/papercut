@@ -1,122 +1,91 @@
-const axios = require('axios');
-const _ = require('lodash');
-const util = require('util');
-const { parseString } = require('xml2js');
-const parseStringPromisified = util.promisify(parseString);
+import { parseString } from "xml2js";
+import { promisify } from "util";
 
-const PREFIXES = {
-	ALL: 'all',
-	TI: 'ti', // Title
-	AU: 'au', // Author
-	ABS: 'abs', // Abstract
-	CO: 'co', // Comment
-	JR: 'jr', // Journal Reference
-	CAT: 'cat', // Subject Category
-	RN: 'rn', // Report Number
-};
-
-const SEPARATORS = {
-	AND: '+AND+',
-	OR: '+OR+',
-	ANDNOT: '+ANDNOT+',
-};
-
-const SORT_BY = {
-	RELEVANCE: 'relevance',
-	LAST_UPDATED_DATE: 'lastUpdatedDate',
-	SUBMITTED_DATE: 'submittedDate',
-};
-
-const SORT_ORDER = {
-	ASCENDING: 'ascending',
-	DESCENDING: 'descending',
-};
-
-const get_arxiv_url = ({searchQuery, sortBy, sortOrder, start, maxResults}) =>
-	`http://export.arxiv.org/api/query?search_query=${searchQuery}&start=${start}&max_results=${maxResults}${
-		sortBy ? `&sortBy=${sortBy}` : ''
-	}${sortOrder ? `&sortOrder=${sortOrder}` : ''}`;
+const parseXmlPromise = promisify(parseString);
 
 /**
- * Parse arXiv entry object.
- * @param {Object} entry.
- * @returns {Object} formatted arXiv entry object.
+ * The object schema that arxiv returns is:
+	{
+		id: [ string ],
+		updated: [ string ],
+		published: [ string ],
+		title: string[],
+		summary: string[],
+		author: { name: [Array] }[],
+		'arxiv:doi': { _: 'string', '$': [Object] }[],
+		link: { '$': [Object] }[],
+		'arxiv:primary_category': [ { '$': [Object] } ],
+		category: { '$': [Object] }[]
+	}
+ which has a lot of redundency. This function parses it into a more usable format
+ * @param {Object} param0 
+ * @param {string[]} param0.id
+ * @param {string[]} param0.updated
+ * @param {string[]} param0.published
+ * @param {string[]} param0.title
+ * @param {string[]} param0.summary
+ * @param {string[]} param0.author
+ * @param {string[]} param0.links
+ * @param {string[]} param0.category
+ * @returns {Object}
  */
-function parseArxivObject(entry) {
+function parseArxivObject({
+	id: [id],
+	updated: [updated],
+	published: [published],
+	title,
+	summary,
+	author,
+	link,
+	category,
+	"arxiv:primary_category": [{$: primary_category}],
+	"arxiv:comment": [{_: comment}] = [{_: ''}],
+	"arxiv:affiliation": [{_: affiliation}] = [{_: ''}],
+	"arxiv:journal_ref": [{_: journal_ref}] = [{_: ''}],
+	"arxiv:doi": [{_: doi}] = [{_: ''}],
+})
+{
 	return {
-		id: _.get(entry, 'id[0]', ''),
-		title: _.get(entry, 'title[0]', ''),
-		summary: _.get(entry, 'summary[0]', '').trim(),
-		authors: _.get(entry, 'author', []).map(author => author.name),
-		links: _.get(entry, 'link', []).map(link => link.$),
-		published: _.get(entry, 'published[0]', ''),
-		updated: _.get(entry, 'updated[0]', ''),
-		categories: _.get(entry, 'category', []).map(category => category.$),
-	};
+		id,
+		updated,
+		published,
+		title: title.join(''),
+		summary: summary.join(''),
+		author: author.map(a => a.name),
+		link: link.map(l => l.$),
+		category: category.map(c => c.$.term),
+		primary_category,
+		comment,
+		affiliation,
+		journal_ref,
+		doi,
+	}
 }
 
 /**
- * Parse a tag to a query string.
- * @param {{name: string, prefix: string}} tag
- * @param {string} name - the name of the tag - mandatory.
- * @param {string} prefix - one of PREFIXES - default to ALL.
- * @returns {string} query string of a tag.
+ * @param {Object} param0
+ * @param {string} param0.query The arxiv api `search_query` 
+ * @param {Array.<string>} [param0.ids = []] The arxiv api `id_list` 
+ * @param {number} [param0.start = 0] Index of the query
+ * @param {number} [param0.max_results = 10] Max results of the query 
+ * @returns {Promise<{id: string, updated: string, published: string, title: string, summary: string, author: string, link: string, category: string, primary_category: string, comment: string, affiliation: string, journal_ref: string, doi: string}>} Returns the arxiv api's xml response parsed as an object
  */
-function parseTag({name, prefix = PREFIXES.ALL}) {
-	if (!_.isString(name) || _.isEmpty(name)) {
-		throw new Error('you must specify tag name');
-	}
-	if (!Object.values(PREFIXES).includes(prefix)) {
-		throw new Error(`unsupported prefix: ${prefix}`);
-	}
-	return `${prefix}:${name}`;
+async function rawQueryArxiv({ query = "", ids = [], start = 0, max_results = 10 })
+{
+	if (!query && !ids.join("")) throw new Error('No id or query for the API');
+
+	// Build Query - http://export.arxiv.org/api/{method_name}?{parameters}
+
+	const apiResponse = await fetch(
+		`http://export.arxiv.org/api/query?search_query=${query}&` +
+		`id_list=${ids.join(',')}&` +
+		`start=${start}&` +
+		`max_results=${max_results}`
+	);
+	const objectResponse = await parseXmlPromise(await apiResponse.text());
+	const usefulResponse = objectResponse.feed.entry;
+	return usefulResponse.map(parseArxivObject)
 }
 
-/**
- * Parse include tags and exclude tags to a query string.
- * @param {Array.<{include: Array, exclude: Array}>} tags
- * @returns {string} query string between tags.
- */
-function parseTags({include, exclude = []}) {
-	if (!Array.isArray(include) || !Array.isArray(exclude)) {
-		throw new Error('include and exclude must be arrays');
-	}
-	if (include.length === 0) {
-		throw new Error('include is a mandatory field');
-	}
-	return `${include.map(parseTag).join(SEPARATORS.AND)}${exclude.length > 0 ? SEPARATORS.ANDNOT : ''}${exclude
-		.map(parseTag)
-		.join(SEPARATORS.ANDNOT)}`;
-}
-
-/**
- * Fetch data from arXiv API
- * @async
- * @param {{searchQueryParams: Array.<{include: Array, exclude: Array}>, start: number, maxResults: number}} args
- * @param {Array} searchQueryParams - array of search query.
- * @param {string} sortBy - can be "relevance", "lastUpdatedDate", "submittedDate".
- * @param {string} sortOrder - can be either "ascending" or "descending".
- * @param {number} start - the index of the first returned result.
- * @param {number} maxResults - the number of results returned by the query.
- * @returns {Promise}
- */
-async function search({searchQueryParams, sortBy, sortOrder, start = 0, maxResults = 10}) {
-	if (!Array.isArray(searchQueryParams)) {
-		throw new Error('query param must be an array');
-	}
-	if (sortBy && !Object.values(SORT_BY).includes(sortBy)) {
-		throw new Error(`unsupported sort by option. should be one of: ${Object.values(SORT_BY).join(' ')}`);
-	}
-	if (sortOrder && !Object.values(SORT_ORDER).includes(sortOrder)) {
-		throw new Error(`unsupported sort order option. should be one of: ${Object.values(SORT_ORDER).join(' ')}`);
-	}
-	const searchQuery = searchQueryParams.map(parseTags).join(SEPARATORS.OR);
-	console.log(searchQuery)
-	const response = await axios.get(get_arxiv_url({searchQuery, sortBy, sortOrder, start, maxResults}));
-	const parsedData = await parseStringPromisified(response.data);
-	return _.get(parsedData, 'feed.entry', []).map(parseArxivObject);
-}
-
-module.exports = {
-	search,
-};
+export { rawQueryArxiv as query }
+export default rawQueryArxiv

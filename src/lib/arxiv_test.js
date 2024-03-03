@@ -1,5 +1,5 @@
-const arxiv = require('./arxiv_rewrite');
+import { query } from './arxiv.js';
 
-const papers = arxiv.query({
-
-}).then()
+query({
+	query: 'test'
+}).then(console.log)
