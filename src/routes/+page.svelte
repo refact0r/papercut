@@ -2,17 +2,11 @@
 	import IconSearch from '~icons/ph/magnifying-glass';
 	import logo from '$lib/assets/papercut-logo.png';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
 	let params = '';
-	let search;
-	onMount(() => {
-		search.addEventListener('keypress', function (event) {
-			if (event.key === 'Enter') {
-				event.preventDefault();
-				goto(`/search?q=${params}`);
-			}
-		});
-	});
+
+	function searchQuery() {
+		goto(`/search?q=${params}`);
+	}
 </script>
 
 <svelte:head>
@@ -27,8 +21,18 @@
 		<!--<p style="margin:-.25rem 0rem 0rem 0rem;">finding sources has never been more fun</p>-->
 		<br />
 		<div class="search">
-			<input type="text" placeholder="search..." bind:value={params} bind:this={search} />
-			<a class="submit" href={`/search?q=${params}`}><IconSearch /></a>
+			<form on:submit|preventDefault={() => searchQuery()}>
+				<input
+					type="text"
+					placeholder="search..."
+					bind:value={params}
+					oninvalid="this.setCustomValidity('please enter a valid search term! only letters and numbers are allowed.')"
+					oninput="this.setCustomValidity('')"
+					pattern="[a-zA-Z0-9]+"
+					required
+				/>
+				<button type="submit" class="submit"><IconSearch /></button>
+			</form>
 			<br />
 			<a href="/adv-search" class="adv">advanced search</a>
 		</div>
@@ -80,13 +84,16 @@
 		border-radius: 2rem;
 		transition: 0.1s;
 		padding: 0.2rem 0.45rem;
+		outline: none;
+		border: none;
 	}
 
 	.submit:hover {
 		background-color: rgba(192, 192, 192, 0.75);
 		font-size: 1.7rem;
-		margin-top: 0.5rem;
+		margin-top: 0.6rem;
 		margin-left: -3.6rem;
+		cursor: pointer;
 	}
 
 	.adv {
