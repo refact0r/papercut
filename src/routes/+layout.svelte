@@ -2,11 +2,12 @@
 	import '../app.scss';
 </script>
 
-<div class="app">
-	<main>
-		<slot />
-	</main>
-</div>
+<main>
+	<slot />
+</main>
 
 <style>
+	main {
+		height: 100%;
+	}
 </style>
