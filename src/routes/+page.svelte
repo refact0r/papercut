@@ -57,10 +57,11 @@
 		}
 	}
 
-	h2 {
-		color: var(--fg-2);
+	h2,
+	a {
 		font-weight: 500;
 		font-size: 1.6rem;
+		letter-spacing: -0.01em;
 	}
 
 	.row {
@@ -89,8 +90,6 @@
 	}
 
 	a {
-		font-weight: 500;
-		font-size: 1.6rem;
 		&.options {
 			margin-left: auto;
 		}
