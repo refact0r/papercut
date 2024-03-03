@@ -14,7 +14,7 @@ const openai = new OpenAI({
  * @param {string} abstract The abstract that corresponds 
  * @param {streamCallback} streamHandler
  */
-async function summarize(abstract, query = '', streamHandler)
+async function summarize(abstract, query = '', streamHandler = () => {})
 {
 	const stream = await openai.chat.completions.create({
 		model: 'gpt-4',
@@ -28,7 +28,9 @@ async function summarize(abstract, query = '', streamHandler)
 		}],
 		stream: true,
 	});
-	for await (const chunk of stream) streamHandler(chunk.choices[0]?.delta?.content || '');
+	let total = ''
+	for await (const chunk of stream) { streamHandler(chunk.choices[0]?.delta?.content || ''); total += chunk.choices[0]?.delta?.content || ''}
+	return total 
 }
 
 export { summarize }

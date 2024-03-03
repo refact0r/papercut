@@ -1,15 +1,19 @@
 import { query } from './arxiv.js';
 import { summarize } from './summarize_article.js'
-// query({
-// 	query: 'test'
-// }).then(console.log)
-
+console.time('Query')
 query({
-	ids: ['1412.5029'],
-	max_results: 1,
+	query: 'test',
+	max_results: 20,
 	start: 0,
-})
-	.then(([h]) => {
-		console.log(h.summary)
-		summarize(h.summary, '', (chunk) => process.stdout.write(chunk))
+}).then(articles => {
+	console.timeEnd('Query')
+	console.time('AI')
+	Promise.all(
+		articles.map(
+			async article => summarize(article.summary, 'test')
+		)
+	).then(summaries => {
+		console.timeEnd('AI')
+		console.log(summaries)
 	})
+})
