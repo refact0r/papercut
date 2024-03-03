@@ -4,20 +4,26 @@
 	import IconArrow from '~icons/ph/arrow-right-bold';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 
 	let results;
-
-	let query = $page.url.searchParams.get('q');
 
 	onMount(async () => {
 		getResults();
 	});
+
+	let query = $page.url.searchParams.get('q');
 
 	async function getResults() {
 		results = null;
 		const res = await fetch(`/search?q=${query}`);
 		results = await res.json();
 		console.log(results);
+	}
+
+	function refresh() {
+		goto('/search?q=' + query);
+		getResults();
 	}
 </script>
 
@@ -28,8 +34,8 @@
 
 <div class="content">
 	<div class="search">
-		<form class="searchbar" on:submit|preventDefault={() => getResults()}>
-			<button type="submit" class="submit"><IconSearch style="font-size: 1.4rem;" /></button>
+		<form class="searchbar" on:submit|preventDefault={() => refresh()}>
+			<button type="submit" class="submit"><IconSearch style="font-size: 1.6rem;" /></button>
 			<input type="text" placeholder="search..." bind:value={query} required />
 		</form>
 		<div class="links">
@@ -50,9 +56,11 @@
 					</div>
 				{/each}
 			{:else if results && results.length === 0}
-				<p>No results found for "{query}"</p>
+				<div class="results-box">
+					<p>No results found for "{query}"</p>
+				</div>
 			{:else}
-				<div class="load-pos">
+				<div class="results-box">
 					<div class="loader"></div>
 				</div>
 			{/if}
@@ -115,7 +123,6 @@
 			min-height: 2rem;
 			@include flex(row, center, center);
 			color: var(--fg-3);
-			z-index: -1;
 			transition: 0.2s;
 		}
 		.remove {
@@ -132,6 +139,11 @@
 		}
 	}
 
+	.results-box {
+		width: 100%;
+		margin: 0 3rem;
+	}
+
 	.result {
 		width: 100%;
 		background-color: var(--bg-2);
@@ -143,6 +155,7 @@
 		a {
 			color: var(--fg);
 		}
+		z-index: 1;
 	}
 
 	.load-pos {
