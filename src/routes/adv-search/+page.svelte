@@ -2,11 +2,7 @@
 	import IconSearch from '~icons/ph/magnifying-glass';
 	import logo from '$lib/assets/papercut-logo.png';
 	import { goto } from '$app/navigation';
-	export let data;
-
-	let results = data.results;
-
-	let params = window.location.search.slice(3, window.location.search.length);
+	let params = '';
 
 	function searchQuery() {
 		goto(`/search?q=${params}`);
@@ -14,8 +10,8 @@
 </script>
 
 <svelte:head>
-	<title>results - papercut</title>
-	<meta name="description" content="Search results" />
+	<title>advanced search - papercut</title>
+	<meta name="description" content="papercut advanced search page" />
 </svelte:head>
 
 <div class="content">
@@ -36,10 +32,7 @@
 				<button type="submit" class="submit"><IconSearch /></button>
 			</form>
 			<br />
-			<a href="/adv-search" class="adv">advanced search</a>
 		</div>
-		<br />
-		<h1>Results</h1>
 	</div>
 </div>
 
@@ -86,15 +79,5 @@
 		margin-top: 0.6rem;
 		margin-left: -3.6rem;
 		cursor: pointer;
-	}
-
-	.adv {
-		float: right;
-		padding: 0.25rem 1rem 0rem 0rem;
-		text-decoration: none;
-		color: black;
-	}
-	.adv:hover {
-		text-decoration: underline;
 	}
 </style>

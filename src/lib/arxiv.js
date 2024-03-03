@@ -1,15 +1,7 @@
 import { XMLParser } from 'fast-xml-parser'
-
+ 
 /**
- * @param {Object} param0 
- * @param {string} param0.id
- * @param {string} param0.updated
- * @param {string} param0.published
- * @param {string} param0.title
- * @param {string} param0.summary
- * @param {string} param0.author
- * @param {string[]} param0.links
- * @param {string[]} param0.category
+ * @param {{id: string, updated: string, published: string, title: string, summary: string, author: string, links: string[], category: string[], 'arxiv:primary_category': Object 'arxiv:comment': Object 'arxiv:affiliation': Object 'arxiv:journal_ref': Object 'arxiv:doi': Object}} param0
  * @returns {Object}
  */
 function parseArxivObject({
@@ -21,11 +13,11 @@ function parseArxivObject({
 	author,
 	link,
 	category,
-	"arxiv:primary_category":  primary_category,
-	"arxiv:comment": comment = '',
-	"arxiv:affiliation": affiliation = '',
-	"arxiv:journal_ref": journal_ref = '',
-	"arxiv:doi": doi = '',
+	"arxiv:primary_category": { '@_term': primary_category } = { '@_term': '' },
+	"arxiv:comment": { '#text': comment } = { '#text': '' },
+	"arxiv:affiliation": { '#text': affiliation } = {'#text': ''},
+	"arxiv:journal_ref": { '#text': journal_ref } = {'#text': ''},
+	"arxiv:doi": { '#text': doi } = { '#text': ''},
 })
 {
 	return {
@@ -35,8 +27,8 @@ function parseArxivObject({
 		title,
 		summary,
 		author: author.name ? [author.name] : author.map(a => a.name),
-		link,
-		category,
+		link: link['@_href'] ? [link['@_href']] : link.map(l => l['@_href']),
+		category: category['@_term'] ? [category['@_term']] : category.map(c => c['@_term']),
 		primary_category,
 		comment,
 		affiliation,
@@ -65,8 +57,8 @@ async function rawQueryArxiv({ query = "", ids = [], start = 0, max_results = 10
 		`start=${start}&` +
 		`max_results=${max_results}`
 	);
-const objectResponse = (new XMLParser()).parse(await apiResponse.text());
-	const usefulResponse = objectResponse.feed.entry;
+	const objectResponse = (new XMLParser({ ignoreAttributes: false })).parse(await apiResponse.text());
+	const usefulResponse = objectResponse.feed.entry.id ? [objectResponse.feed.entry] : objectResponse.feed.entry;
 	return usefulResponse.map(parseArxivObject)
 }
 
