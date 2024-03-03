@@ -1,3 +1,8 @@
+<script>
+	import { enhance } from '$app/forms';
+	import IconSearch from '~icons/ph/magnifying-glass';
+</script>
+
 <svelte:head>
 	<title>papercut</title>
 	<meta name="description" content="papercut home page" />
@@ -6,12 +11,10 @@
 <div class="content">
 	<div class="container">
 		<h1>paper<span class="slash">/</span>cut</h1>
-		<div class="searchbar">
-			<form>
-				<input type="text" placeholder="Search..." name="search" />
-				<button type="submit" id="submit"></button>
-			</form>
-		</div>
+		<form method="POST" action="/search" use:enhance>
+			<input type="text" placeholder="search..." name="search" />
+			<button type="submit" class="submit"><IconSearch /></button>
+		</form>
 	</div>
 </div>
 
