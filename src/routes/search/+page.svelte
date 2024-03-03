@@ -152,7 +152,7 @@
 				transform: translateX(0);
 			}
 			.result:hover {
-				outline: solid 4px gray;
+				outline: solid 4px var(--fg-3);
 			}
 		}
 	}
