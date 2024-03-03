@@ -11,9 +11,9 @@
 <div class="content">
 	<div class="container">
 		<h1><span class="paper">paper</span><span class="slash">/</span>cut</h1>
-		<form action="/search">
+		<form class="searchbar" action="/search">
 			<button type="submit" class="submit"><IconSearch style="font-size: 1.6rem;" /></button>
-			<input type="text" placeholder="search..." name="q" required autofocus="autofocus"/>
+			<input type="text" placeholder="search..." name="q" required autofocus="autofocus" />
 		</form>
 		<div class="row">
 			<h2>find papers fast.</h2>
@@ -25,13 +25,13 @@
 
 <style lang="scss">
 	.content {
-		padding: 10vh;
+		padding: 6vw;
 		height: 100%;
 		width: 100%;
 	}
 
 	.container {
-		margin-top: 20vh;
+		margin-top: 10vw;
 	}
 
 	h1 {
@@ -63,25 +63,6 @@
 		@include flex(row, left, center);
 
 		gap: 2rem;
-	}
-
-	form {
-		background-color: var(--bg-2);
-		border-bottom: 4px solid var(--fg);
-		@include flex(row, left, center);
-		width: 100%;
-
-		button {
-			padding: 0.8rem 1rem;
-			background: none;
-			@include flex(column, center, center);
-		}
-
-		input {
-			padding: 0.8rem 1rem 0.8rem 0;
-			font-size: 1.6rem;
-			width: 100%;
-		}
 	}
 
 	a {

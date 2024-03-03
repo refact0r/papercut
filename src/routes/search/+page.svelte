@@ -1,6 +1,6 @@
 <script>
 	import IconSearch from '~icons/ph/magnifying-glass';
-	import logo from '$lib/assets/papercut-logo.png';
+	import IconX from '~icons/ph/x-bold';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 
@@ -25,109 +25,109 @@
 	<meta name="description" content="search results" />
 </svelte:head>
 
-<div class="searchbar">
-	<div class="container">
-		<div class="search">
-			<form on:submit|preventDefault={() => getResults()}>
-				<button type="submit" class="submit"><IconSearch style="font-size: 1.4rem;" /></button>
-				<input type="text" placeholder="search..." bind:value={query} required />
-			</form>
-			<br />
-			<div class="links">
-				<div class="column">
-					<a href="/">&lt;&lt;&lt; back to homepage</a>
-				</div>
-				<div class="fat"></div>
-				<div class="column"><a href="/adv-search" style="float:right;">advanced search</a></div>
-			</div>
-		</div>
-	</div>
-</div>
 <div class="content">
-	<div class="results">
-		{#if results != null}
-			{#each results as result, i}
-				<a href={result.id} class="source" title={result.title} target="_blank">{result.title}</a>
-				<br>
-			{/each}
-		{/if}
-		<div class="load-pos">
-			<div class="loader"></div>
+	<div class="search">
+		<form class="searchbar" on:submit|preventDefault={() => getResults()}>
+			<button type="submit" class="submit"><IconSearch style="font-size: 1.4rem;" /></button>
+			<input type="text" placeholder="search..." bind:value={query} required />
+		</form>
+		<div class="links">
+			<a href="/">&lt;&lt;&lt; back to homepage</a>
+			<a href="/adv-search" style="float:right;">advanced search</a>
 		</div>
 	</div>
-	<div class="stored"></div>
+	<div class="container">
+		<div class="results">
+			{#if results && results.length > 0}
+				{#each results as result}
+					<div class="result-container">
+						<button class="remove">x</button>
+						<div class="result">
+							<a href={result.id} class="source" title={result.title}><h3>{result.title}</h3></a>
+						</div>
+						<button class="add">j</button>
+					</div>
+				{/each}
+			{:else if results && results.length === 0}
+				<p>No results found for "{query}"</p>
+			{:else}
+				<div class="load-pos">
+					<div class="loader"></div>
+				</div>
+			{/if}
+		</div>
+		<div class="list"></div>
+	</div>
 </div>
 
 <style lang="scss">
-	.searchbar {
-		@include flex(column, center, center);
-
-		height: 25%;
-		width: 100%;
-		justify-content: center;
-	}
-	.container {
-		width: 90%;
-		justify-content: center;
-	}
 	.content {
-		display: flex;
-		gap: 1%;
-		margin: 0rem 5%;
-		min-height: 70%;
+		@include flex(column, default, default);
+		gap: 2vw;
+		padding: 3vw 2vw;
+	}
+
+	.search {
+		padding: 0 3rem;
 	}
 
 	form {
-		background-color: var(--bg-2);
-		border-bottom: 4px solid var(--fg);
-		@include flex(row, left, center);
-		width: 100%;
-
 		button {
-			padding: 0.8rem;
-			background: none;
-			@include flex(column, center, center);
+			padding: 0.6rem 0.8rem;
 		}
-
 		input {
-			padding: 0.8rem 0.8rem 0.8rem 0;
-			font-size: 1.4rem;
-			width: 100%;
+			font-size: 1.2rem;
+			padding: 0.6rem 0.8rem 0.6rem 0;
 		}
 	}
 
 	.links {
 		display: flex;
-		margin-top: -0.5rem;
+		justify-content: space-between;
+		margin-top: 0.5rem;
 	}
-	.column {
-		width: 20%;
-	}
-	.fat {
-		width: 60%;
-	}
-	a {
-		text-decoration: none;
-		color: black;
-	}
-	a:hover {
-		text-decoration: underline;
+
+	.container {
+		@include flex(row, default, default);
+		gap: 1rem;
 	}
 
 	.results {
-		background-color: rgb(239, 239, 239);
-		padding: 2rem;
-		text-align: center;
-		width: 70%;
+		width: 65%;
+		@include flex(column, default, default);
+		gap: 1rem;
 	}
 
-	.stored {
-		width: 30%;
-		background-color: rgb(239, 239, 239);
+	.list {
+		width: 35%;
+		background-color: var(--bg-2);
+		padding: 1.5rem;
+		margin-right: 3rem;
 	}
 
-	.source {
-		background-color: white;
+	.result-container {
+		@include flex(row, space-between, center);
+		gap: 1rem;
+
+		.remove,
+		.add {
+			min-width: 2rem;
+			min-height: 2rem;
+		}
+	}
+
+	.result {
+		width: 100%;
+		background-color: var(--bg-2);
+		padding: 1rem;
+
+		h3 {
+			margin: 0;
+		}
+
+		a {
+			color: var(--fg);
+		}
 	}
 
 	.load-pos {
@@ -135,7 +135,6 @@
 		justify-content: center;
 		padding: 2rem;
 	}
-
 	.loader {
 		width: 40px;
 		aspect-ratio: 1;
