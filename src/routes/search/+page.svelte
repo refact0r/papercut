@@ -21,6 +21,8 @@
 		console.log(results);
 	}
 
+	function expandSummary(element) {}
+
 	function refresh() {
 		goto('/search?q=' + query);
 		getResults();
@@ -149,6 +151,9 @@
 			.add {
 				transform: translateX(0);
 			}
+			.result:hover {
+				outline: solid 4px gray;
+			}
 		}
 	}
 
@@ -162,7 +167,9 @@
 		background-color: var(--bg-2);
 		padding: 1rem;
 		cursor: pointer;
-		transition: 0.1s;
+		transition: 0.2s;
+		outline: none;
+		z-index: 2;
 		h3 {
 			margin: 0;
 			font-size: 1.1rem;
@@ -170,10 +177,6 @@
 		a {
 			color: var(--fg);
 		}
-	}
-
-	.result:hover {
-		border: 0.2rem solid gray;
 	}
 
 	.load-pos {

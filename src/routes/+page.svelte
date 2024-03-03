@@ -24,7 +24,8 @@
 		</form>
 		<div class="row">
 			<h2>find papers fast.</h2>
-			<a href="/settings" class="options">settings</a>
+			<a href="/sources" class="options">sources</a>
+			<a href="/settings">settings</a>
 			<a href="/about">about</a>
 		</div>
 	</div>
