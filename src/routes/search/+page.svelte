@@ -6,12 +6,9 @@
 
 	let results = data.results;
 
-	let params = decodeURI(window.location.search.slice(3, window.location.search.length));
-
 	function searchQuery() {
 		goto(`/search?q=${encodeURI(params)}`);
 	}
-
 </script>
 
 <svelte:head>
@@ -25,12 +22,7 @@
 		<br />
 		<div class="search">
 			<form on:submit|preventDefault={() => searchQuery()}>
-				<input
-					type="text"
-					placeholder="search..."
-					bind:value={params}
-					required
-				/>
+				<input type="text" placeholder="search..." bind:value={data.query} required />
 				<button type="submit" class="submit"><IconSearch /></button>
 			</form>
 			<br />
@@ -79,7 +71,7 @@
 	}
 
 	.submit:hover {
-		background-color: rgba(0, 0, 0, 0.10);
+		background-color: rgba(192, 192, 192, 0.75);
 		font-size: 1.7rem;
 		margin-top: 0.5rem;
 		margin-left: -3.6rem;
