@@ -28,7 +28,7 @@
 	.slash {
 		position: absolute;
 		font-weight: 700;
-		margin-left: 0.1ch;
+		margin-left: 0.15ch;
 		margin-top: 0.1ch;
 	}
 </style>
