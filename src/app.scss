@@ -3,7 +3,7 @@
 	--bg-2: oklch(86% 0.01 195);
 	--fg: oklch(20% 0.01 195);
 	--fg-2: oklch(35% 0.01 195);
-	--fg-3: oklch(75% 0.01 195);
+	--fg-3: oklch(75ccc% 0.01 195);
 }
 
 * {
@@ -11,7 +11,6 @@
 }
 
 html {
-	height: 100%;
 }
 
 body {
@@ -19,6 +18,7 @@ body {
 	color: var(--fg);
 	margin: 0;
 	height: 100%;
+	display: flex;
 	min-height: 100vh;
 	// font-family: 'Plus Jakarta Sans', sans-serif;
 	// font-family: 'Manrope', sans-serif;
@@ -37,7 +37,6 @@ button {
 	border: none;
 	font: inherit;
 	padding: 0;
-
 	&:hover {
 		cursor: pointer;
 	}
@@ -49,11 +48,9 @@ input {
 	background: none;
 	border: none;
 	padding: 0;
-
 	&:focus {
 		outline: none;
 	}
-
 	&::placeholder {
 		color: var(--fg-3);
 	}

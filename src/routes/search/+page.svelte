@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { parseDate } from '$lib/parse_date';
 
 	let results;
 
@@ -36,8 +37,9 @@
 
 <div class="content">
 	<div class="search">
+		<a href="/"><h1><span class="paper">paper</span><span class="slash">/</span>cut</h1></a>
 		<form class="searchbar" on:submit|preventDefault={() => refresh()}>
-			<button type="submit" class="submit"><IconSearch style="font-size: 1.6rem;" /></button>
+			<button type="submit" class="submit"><IconSearch style="font-size: 1.3rem;" /></button>
 			<input
 				type="text"
 				placeholder="search..."
@@ -48,10 +50,10 @@
 				pattern="[a-zA-Z0-9 ]+"
 			/>
 		</form>
-		<div class="links">
+		<!-- <div class="links">
 			<a href="/">&lt;&lt;&lt; back to homepage</a>
 			<a href="/adv-search" style="float:right;">advanced search</a>
-		</div>
+		</div> -->
 	</div>
 	<div class="container">
 		<div class="results">
@@ -61,11 +63,7 @@
 						<button class="remove"><IconX style="font-size: 1.2rem;" /></button>
 						<div class="result">
 							<h3>{result.title}</h3>
-							<p>
-								Author(s):
-								{result.author.join(', ')}
-							</p>
-							<p>Date Published: {result.published}</p>
+							<p>{`${parseDate(result.published)} - ${result.author.join(', ')}`}</p>
 							<p>Summary:</p>
 						</div>
 						<button class="add"><IconArrow style="font-size: 1.2rem;" /></button>
@@ -95,6 +93,13 @@
 
 	.search {
 		padding: 0 3rem;
+		@include flex(row, default, center);
+
+		h1 {
+			width: 11rem;
+			font-size: 2rem;
+			margin: 0;
+		}
 	}
 
 	form {
@@ -127,6 +132,7 @@
 
 	.list {
 		width: 35%;
+		height: 100%;
 		background-color: var(--bg-2);
 		padding: 1.5rem;
 		margin-right: 3rem;
@@ -182,6 +188,9 @@
 		}
 		a {
 			color: var(--fg);
+		}
+		p {
+			margin: 0.6rem 0;
 		}
 	}
 

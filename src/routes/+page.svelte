@@ -10,17 +10,19 @@
 
 <div class="content">
 	<div class="container">
-		<h1><span class="paper">paper</span><span class="slash">/</span>cut</h1>
+		<h1 class="logo"><span class="paper">paper</span><span class="slash">/</span>cut</h1>
 		<form class="searchbar" action="/search">
 			<button type="submit" class="submit"><IconSearch style="font-size: 1.6rem;" /></button>
-			<input type="text" 
-				placeholder="search..." 
-				name="q" 
-				required 
-				autofocus="autofocus" 
+			<input
+				type="text"
+				placeholder="search..."
+				name="q"
+				required
+				autofocus="autofocus"
 				oninvalid="this.setCustomValidity('please enter a valid search term! only letters and numbers are allowed.')"
 				oninput="this.setCustomValidity('')"
-				pattern="[a-zA-Z0-9 ]+"/>
+				pattern="[a-zA-Z0-9 ]+"
+			/>
 		</form>
 		<div class="row">
 			<h2>find papers fast.</h2>
@@ -42,7 +44,7 @@
 		margin-top: 10vw;
 	}
 
-	h1 {
+	h1.logo {
 		font-size: 8rem;
 		letter-spacing: -0.015em;
 		margin: 0;
