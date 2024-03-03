@@ -13,6 +13,7 @@ const openai = new OpenAI({
  * Function that gives the summary of the articles 
  * @param {string} abstract The abstract that corresponds 
  * @param {streamCallback} streamHandler
+ * @returns {Promise.<string>}
  */
 async function summarize(abstract, query = '', streamHandler = () => {})
 {
