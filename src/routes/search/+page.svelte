@@ -24,8 +24,11 @@
 	function expandSummary(element) {}
 
 	function refresh() {
-		goto('/search?q=' + query);
-		getResults();
+		query = query.trim();
+		if (query) {
+			goto('/search?q=' + query);
+			getResults();
+		}
 	}
 </script>
 

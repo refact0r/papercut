@@ -1,6 +1,15 @@
 <script>
 	import IconSearch from '~icons/ph/magnifying-glass-bold';
 	import { goto } from '$app/navigation';
+	let query = '';
+
+	function refresh() {
+		query = query.trim();
+		if (query) {
+			goto('/search?q=' + query);
+			getResults();
+		}
+	}
 </script>
 
 <svelte:head>
@@ -11,11 +20,12 @@
 <div class="content">
 	<div class="container">
 		<h1><span class="paper">paper</span><span class="slash">/</span>cut</h1>
-		<form class="searchbar" action="/search">
+		<form class="searchbar" on:submit|preventDefault={() => refresh()}>
 			<button type="submit" class="submit"><IconSearch style="font-size: 1.6rem;" /></button>
 			<input type="text" 
 				placeholder="search..." 
 				name="q" 
+				bind:value={query}
 				required 
 				autofocus="autofocus" 
 				oninvalid="this.setCustomValidity('please enter a valid search term! only letters and numbers are allowed.')"
