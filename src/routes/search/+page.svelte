@@ -6,6 +6,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { parseDate } from '$lib/parse_date';
+	import { sources } from '$lib/stores/sources';
 
 	let results;
 
@@ -17,12 +18,24 @@
 
 	async function getResults() {
 		results = null;
-		const res = await fetch(`/search?q=${query}`);
+		const res = await fetch(`/api/results?q=${query}`);
 		results = await res.json();
 		console.log(results);
 	}
 
 	function expandSummary(element) {}
+
+	function add(i) {
+		$sources.push(results[i]);
+		$sources = $sources;
+	}
+
+	function remove(i) {
+		results.splice(i, 1);
+		results = results;
+	}
+
+	$: console.log($sources);
 
 	function refresh() {
 		query = query.trim();
@@ -61,15 +74,19 @@
 	<div class="container">
 		<div class="results">
 			{#if results && results.length > 0}
-				{#each results as result}
+				{#each results as result, i}
 					<div class="result-container">
-						<button class="remove"><IconX style="font-size: 1.2rem;" /></button>
+						<button class="remove" on:click={() => remove(i)}
+							><IconX style="font-size: 1.2rem;" /></button
+						>
 						<div class="result">
 							<h3>{result.title}</h3>
 							<p>{`${parseDate(result.published)} - ${result.author.join(', ')}`}</p>
-							<p>Summary:</p>
+							<p>Summary: {result.aiSummary}</p>
 						</div>
-						<button class="add"><IconArrow style="font-size: 1.2rem;" /></button>
+						<button class="add" on:click={() => add(i)}
+							><IconArrow style="font-size: 1.2rem;" /></button
+						>
 					</div>
 				{/each}
 			{:else if results && results.length === 0}
@@ -82,7 +99,12 @@
 				</div>
 			{/if}
 		</div>
-		<div class="list"></div>
+		<div class="list">
+			<a href="/sources"><h2>sources</h2></a>
+			{#each $sources as source}
+				<p>{source.title}</p>
+			{/each}
+		</div>
 	</div>
 </div>
 
@@ -137,7 +159,7 @@
 		width: 35%;
 		height: 100%;
 		background-color: var(--bg-2);
-		padding: 1.5rem;
+		padding: 1rem 1.5rem;
 		margin-right: 3rem;
 	}
 
@@ -151,6 +173,9 @@
 			@include flex(row, center, center);
 			color: var(--fg-3);
 			transition: 0.2s;
+			&:hover {
+				color: var(--fg);
+			}
 		}
 		.remove {
 			transform: translateX(3rem);
@@ -195,6 +220,11 @@
 		p {
 			margin: 0.6rem 0;
 		}
+	}
+
+	h2 {
+		margin: 0;
+		font-size: 1.6rem;
 	}
 
 	.load-pos {
