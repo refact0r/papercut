@@ -7,7 +7,7 @@
 	let results = data.results;
 
 	function searchQuery() {
-		goto(`/search?q=${encodeURI(params)}`);
+		goto(`/search?q=${encodeURI(data.query)}`);
 	}
 </script>
 
