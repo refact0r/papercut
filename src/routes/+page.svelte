@@ -13,7 +13,7 @@
 		<h1><span class="paper">paper</span><span class="slash">/</span>cut</h1>
 		<form action="/search">
 			<button type="submit" class="submit"><IconSearch style="font-size: 1.6rem;" /></button>
-			<input type="text" placeholder="search..." name="q" required />
+			<input type="text" placeholder="search..." name="q" required autofocus="autofocus"/>
 		</form>
 		<div class="row">
 			<h2>find papers fast.</h2>
