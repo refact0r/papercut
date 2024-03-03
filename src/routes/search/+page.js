@@ -7,5 +7,5 @@ export async function load({ url, fetch }) {
 
 	console.log(results);
 
-	return {};
+	return { results, query: url.searchParams.get('q') };
 }
