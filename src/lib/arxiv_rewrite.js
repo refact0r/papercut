@@ -36,28 +36,29 @@ function parseArxivObject({
 	title,
 	summary,
 	author,
-	"arxiv:doi": [{_: doi = ''}],
 	link,
+	category,
 	"arxiv:primary_category": [{$: primary_category}],
-	category
+	"arxiv:comment": [{_: comment}] = [{_: ''}],
+	"arxiv:affiliation": [{_: affiliation}] = [{_: ''}],
+	"arxiv:journal_ref": [{_: journal_ref}] = [{_: ''}],
+	"arxiv:doi": [{_: doi}] = [{_: ''}],
 })
 {
-	title = title.join('').replace('\n')
-	summary = summary.join('').replace('\n')
-	author = author.map(a => a.name)
-	link = link.map(l => l.$)
-	category = category.map(c => c.$)
 	return {
 		id,
 		updated,
 		published,
-		title,
-		summary,
-		author,
-		doi,
-		link,
+		title: title.join(''),
+		summary: summary.join(''),
+		author: author.map(a => a.name),
+		link: link.map(l => l.$),
+		category: category.map(c => c.$.term),
 		primary_category,
-		category
+		comment,
+		affiliation,
+		journal_ref,
+		doi,
 	}
 }
 
@@ -80,13 +81,10 @@ async function rawQueryArxiv({ query = "", ids = [], start = 0, max_results = 10
 		`id_list=${ids.join(',')}&` +
 		`start=${start}&` +
 		`max_results=${max_results}`
-	)
-	const objectResponse = await parseXmlPromise(await apiResponse.text())
-	return objectResponse.feed.entry.map(parseArxivObject)
+	);
+	const objectResponse = await parseXmlPromise(await apiResponse.text());
+	const usefulResponse = objectResponse.feed.entry;
+	return usefulResponse.map(parseArxivObject)
 }
 
 export { rawQueryArxiv as query }
-
-rawQueryArxiv({
-	query: 'all:RNN+AND+all:Deep learning+ANDNOT+all:LSTM+OR+all:GAN'
-})
