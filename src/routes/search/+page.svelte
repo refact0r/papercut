@@ -76,7 +76,7 @@
 							><IconX style="font-size: 1.2rem;" /></button
 						>
 						<div class="result">
-							<h3>{result.title}</h3>
+							<a href={result.id}><h3>{result.title}</h3></a>
 							<p>{`${parseDate(result.published)} - ${result.author.join(', ')}`}</p>
 							<p>Summary: {result.aiSummary}</p>
 						</div>
