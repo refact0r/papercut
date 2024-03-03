@@ -66,10 +66,6 @@
 				pattern="[a-zA-Z0-9 ]+"
 			/>
 		</form>
-		<!-- <div class="links">
-			<a href="/">&lt;&lt;&lt; back to homepage</a>
-			<a href="/adv-search" style="float:right;">advanced search</a>
-		</div> -->
 	</div>
 	<div class="container">
 		<div class="results">
