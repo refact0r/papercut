@@ -47,7 +47,7 @@
 	<div class="results">
 		{#if results != null}
 			{#each results as result, i}
-				<a href="" class="source" title={result.title}>{result.title}</a>
+				<a href={result.id} class="source" title={result.title}>{result.title}</a>
 			{/each}
 		{/if}
 		<div class="load-pos">
