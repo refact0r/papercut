@@ -1,6 +1,7 @@
 <script>
-	import IconSearch from '~icons/ph/magnifying-glass';
+	import IconSearch from '~icons/ph/magnifying-glass-bold';
 	import IconX from '~icons/ph/x-bold';
+	import IconArrow from '~icons/ph/arrow-right-bold';
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 
@@ -41,11 +42,11 @@
 			{#if results && results.length > 0}
 				{#each results as result}
 					<div class="result-container">
-						<button class="remove">x</button>
+						<button class="remove"><IconX style="font-size: 1.2rem;" /></button>
 						<div class="result">
 							<a href={result.id} class="source" title={result.title}><h3>{result.title}</h3></a>
 						</div>
-						<button class="add">j</button>
+						<button class="add"><IconArrow style="font-size: 1.2rem;" /></button>
 					</div>
 				{/each}
 			{:else if results && results.length === 0}
@@ -108,11 +109,26 @@
 	.result-container {
 		@include flex(row, space-between, center);
 		gap: 1rem;
-
 		.remove,
 		.add {
 			min-width: 2rem;
 			min-height: 2rem;
+			@include flex(row, center, center);
+			color: var(--fg-3);
+			z-index: -1;
+			transition: 0.2s;
+		}
+		.remove {
+			transform: translateX(3rem);
+		}
+		.add {
+			transform: translateX(-3rem);
+		}
+		&:hover {
+			.remove,
+			.add {
+				transform: translateX(0);
+			}
 		}
 	}
 
@@ -120,11 +136,10 @@
 		width: 100%;
 		background-color: var(--bg-2);
 		padding: 1rem;
-
 		h3 {
 			margin: 0;
+			font-size: 1.1rem;
 		}
-
 		a {
 			color: var(--fg);
 		}
