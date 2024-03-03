@@ -1,6 +1,7 @@
 <script>
-	import { enhance } from '$app/forms';
 	import IconSearch from '~icons/ph/magnifying-glass';
+
+	let params = '';
 </script>
 
 <svelte:head>
@@ -11,10 +12,8 @@
 <div class="content">
 	<div class="container">
 		<h1>paper<span class="slash">/</span>cut</h1>
-		<form method="POST" action="/search" use:enhance>
-			<input type="text" placeholder="search..." name="search" />
-			<button type="submit" class="submit"><IconSearch /></button>
-		</form>
+		<input type="text" placeholder="search..." bind:value={params} />
+		<a class="submit" href={`/search?q=${params}`}><IconSearch /></a>
 	</div>
 </div>
 
