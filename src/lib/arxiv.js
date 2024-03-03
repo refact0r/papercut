@@ -70,7 +70,7 @@ function parseArxivObject({
  * @param {number} [param0.max_results = 10] Max results of the query 
  * @returns {Promise<{id: string, updated: string, published: string, title: string, summary: string, author: string, link: string, category: string, primary_category: string, comment: string, affiliation: string, journal_ref: string, doi: string}>} Returns the arxiv api's xml response parsed as an object
  */
-async function rawQueryArxiv({ query = "", ids = [], start = 0, max_results = 10 })
+async function rawQueryArxiv({ query = "", ids = [], start = 0, max_results = 10 }, fetch = fetch)
 {
 	if (!query && !ids.join("")) throw new Error('No id or query for the API');
 
