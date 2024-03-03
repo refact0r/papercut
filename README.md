@@ -1,38 +1,10 @@
-# create-svelte
+# papercut
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Resarch is not a boring task but there are certain parts of research that are tedius and extremely boring. 
+Finding relevant sources is repetitive and more difficult than it may sound. On top of that bibliography citations are necessary, but boring and monotonous.
+Titles of research papers are often misleading or not truly indicative of the content of an article which leads to missed gold and false prophets. 
+Papercut aims to simplify and increase the efficiency the source searching workflow.
 
-## Creating a project
+# Features
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Papercut is a search engine for arxiv which allows AI summaries of papers while you are searching for sources and afterwards aggregates the useful sources of your research projects into a bibliography.
