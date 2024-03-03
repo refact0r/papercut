@@ -1,16 +1,9 @@
 <svelte:head>
 	<title>about papercut</title>
-	<meta name="description" content="papercut home page" />
+	<meta name="description" content="papercut about page" />
 </svelte:head>
 
-<h1>papercut</h1>
-<div class="searchbar">
-	<form>
-		<input type="text" placeholder="Search..." name="search" />
-		<button type="submit" id="submit"><i class="fa fa-search"></i></button>
-	</form>
-	<p>Type in your prompt here and click the search button to the right end of the search bar.</p>
-</div>
+<h1><a href="/">papercut</a></h1>
 <div class="desc">
 	<h3>What is Papercut?</h3>
 	<p>
@@ -27,7 +20,7 @@
 	<h3>Why should I use Papercut?</h3>
 	<p>
 		With our site, gone are the days of boredom and wasted time on finding relevant and good quality
-		articles on Jstor. Spend your time more productively, using Papercut.
+		articles on arXiv. Spend your time more productively, using Papercut.
 	</p>
 </div>
 <div class="footer">
@@ -35,36 +28,6 @@
 </div>
 
 <style lang="scss">
-	.searchbar {
-		padding: 2rem 0rem 1rem 2rem;
-		background-color: hsla(0, 0%, 0%, 0);
-	}
-	input[type='text'] {
-		outline: none;
-		height: 2rem;
-		border-radius: 4rem;
-		padding: 1rem;
-		font-size: 2rem;
-		border: none;
-		width: 60%;
-	}
-	#submit {
-		position: absolute;
-		height: 4rem;
-		width: 4rem;
-		padding: 1rem;
-		border-radius: 2rem;
-		font-size: 1.25rem;
-		background-color: hsla(0, 0%, 100%, 0%);
-		border: none;
-		transition: 0.3s ease-in-out;
-		right: 19.5%;
-	}
-	#submit:hover {
-		font-size: 1.75rem;
-		transform: rotate(360deg);
-		cursor: pointer;
-	}
 	.desc {
 		padding: 1rem 10rem;
 	}

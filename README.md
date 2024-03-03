@@ -7,4 +7,4 @@ Papercut aims to simplify and increase the efficiency the source searching workf
 
 # Features
 
-Papercut is a search engine for arxiv (https://arxiv.org/) which generates AI summaries of papers while you are searching for sources and afterwards aggregates the useful sources of your research projects into a bibliography.
+Papercut is a search engine for [arXiv](https://arxiv.org/) which generates AI summaries of papers while you are searching for sources and afterwards aggregates the useful sources of your research projects into a bibliography.

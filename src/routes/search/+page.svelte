@@ -22,7 +22,7 @@
 
 <svelte:head>
 	<title>results - papercut</title>
-	<meta name="description" content="Search results" />
+	<meta name="description" content="search results" />
 </svelte:head>
 
 <div class="content">
