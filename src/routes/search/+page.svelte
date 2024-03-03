@@ -31,8 +31,11 @@
 			</form>
 			<br />
 			<div class="links">
-				<a href="/" class="back">&lt;&lt;&lt; back to homepage</a>
-				<a href="/adv-search" class="adv">advanced search</a>
+				<div class="column">
+					<a href="/">&lt;&lt;&lt; back to homepage</a>
+				</div>
+				<div class="fat"></div>
+				<div class="column"><a href="/adv-search" style="float:right;">advanced search</a></div>
 			</div>
 		</div>
 	</div>
@@ -86,21 +89,18 @@
 	.links {
 		display: flex;
 		margin-top: -0.5rem;
-		gap: 72%;
 	}
-	.back {
+	.column {
+		width: 20%;
+	}
+	.fat {
+		width: 60%;
+	}
+	a {
 		text-decoration: none;
 		color: black;
 	}
-	.back:hover {
-		text-decoration: underline;
-	}
-
-	.adv {
-		text-decoration: none;
-		color: black;
-	}
-	.adv:hover {
+	a:hover {
 		text-decoration: underline;
 	}
 
