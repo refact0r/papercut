@@ -27,18 +27,10 @@
 
 <div class="searchbar">
 	<div class="container">
-		<!--<a href="/"><img src={logo} alt="logo" style="width: 18rem;" /></a>
-		<br />-->
 		<div class="search">
-			<!--<form on:submit|preventDefault={() => searchQuery()}>
-				<input type="text" placeholder="search..." bind:value={data.query} required />
 			<form on:submit|preventDefault={() => getResults()}>
-				<input type="text" placeholder="search..." bind:value={query} required />
-				<button type="submit" class="submit"><IconSearch /></button>
-			</form>-->
-			<form on:submit|preventDefault={() => searchQuery()}>
 				<button type="submit" class="submit"><IconSearch style="font-size: 1.4rem;" /></button>
-				<input type="text" placeholder="search..." bind:value={data.query} required />
+				<input type="text" placeholder="search..." bind:value={query} required />
 			</form>
 			<br />
 			<div class="links">
