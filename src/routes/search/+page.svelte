@@ -90,6 +90,7 @@
 		@include flex(column, default, default);
 		gap: 2vw;
 		padding: 3vw 2vw;
+		height: 100%;
 	}
 
 	.search {
@@ -115,6 +116,7 @@
 	.container {
 		@include flex(row, default, default);
 		gap: 1rem;
+		height: 100%;
 	}
 
 	.results {
@@ -159,8 +161,11 @@
 	}
 
 	.results-box {
-		width: 100%;
 		margin: 0 3rem;
+		background-color: var(--bg-2);
+		padding: 1rem;
+		height: 100%;
+		@include flex(column, center, center);
 	}
 
 	.result {
