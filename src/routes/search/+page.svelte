@@ -30,7 +30,13 @@
 	<div class="search">
 		<form class="searchbar" on:submit|preventDefault={() => getResults()}>
 			<button type="submit" class="submit"><IconSearch style="font-size: 1.4rem;" /></button>
-			<input type="text" placeholder="search..." bind:value={query} required />
+			<input type="text" 
+				placeholder="search..." 
+				bind:value={query} 
+				required 
+				oninvalid="this.setCustomValidity('please enter a valid search term! only letters and numbers are allowed.')"
+				oninput="this.setCustomValidity('')"
+				pattern="[a-zA-Z0-9 ]+"/>
 		</form>
 		<div class="links">
 			<a href="/">&lt;&lt;&lt; back to homepage</a>
