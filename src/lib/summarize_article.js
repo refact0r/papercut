@@ -18,7 +18,7 @@ const openai = new OpenAI({
  */
 async function summarize(abstract, query = '', streamHandler = () => {}) {
 	const stream = await openai.chat.completions.create({
-		model: 'gpt-3.5-turbo',
+		model: 'gpt-5-nano',
 		messages: [
 			{
 				role: 'user',
@@ -44,3 +44,4 @@ async function summarize(abstract, query = '', streamHandler = () => {}) {
 
 export { summarize };
 export default summarize;
+
